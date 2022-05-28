@@ -13,7 +13,7 @@ const MySelect = ({options, defaultValue, value, onChange}) => {
                 </option>
             )}
         </select>
-    );
+    );  
 };
 
 export default MySelect;

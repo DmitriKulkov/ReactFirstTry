@@ -1,0 +1,19 @@
+{
+    "navbar":{
+        "link_about":"About",
+        "link_posts":"Posts",
+        "EN":"EN",
+        "RU":"RU",
+        "logout":"Log out"
+    },
+    "about":"Custom app for React learning",
+    "posts":{
+        "create": "Create Post",
+        "posts_number": "Number of Elements",
+        "error": "Error:",
+        "title_js": "JS Posts"
+    },
+    "dates": {
+        "fullDate": "The date is {{ date, short }}"
+    }
+}

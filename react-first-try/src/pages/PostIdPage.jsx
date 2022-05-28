@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {useFetching} from "../hooks/useFetching";
 import PostService from "../API/PostService";
-import Loader from "../components/UI/Loader/Loader";
+import Loader from "../components/UI/loader/Loader";
 
 const PostIdPage = () => {
     const params = useParams()
@@ -23,7 +23,7 @@ const PostIdPage = () => {
     }, [])
 
     return (
-        <div>
+        <div className='App'>
             <h1>
                 Post with id {params.id}
             </h1>

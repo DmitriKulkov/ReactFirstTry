@@ -6,13 +6,15 @@ import MyButton from "../components/UI/button/MyButton";
 import MyModal from "../components/UI/modal/MyModal";
 import PostForm from "../components/PostForm";
 import PostFilter from "../components/PostFilter";
-import Loader from "../components/UI/Loader/Loader";
+import Loader from "../components/UI/loader/Loader";
 import PostList from "../components/PostList";
 import Pagination from "../components/UI/pagination/Pagination";
 import {useFetching} from "../hooks/useFetching";
 import {usePosts} from "../hooks/usePosts";
 import {useObserver} from "../hooks/useObserver";
 import MySelect from "../components/UI/select/MySelect";
+import { useTranslation } from "react-i18next";
+
 function Posts() {
     const [posts, setPosts] = useState([])
     const [filter, setFilter] = useState({sort: "", query:""})
@@ -23,10 +25,12 @@ function Posts() {
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
     const lastElement = useRef()
 
+    const {t, i18n} = useTranslation()
+
 
 
     const [fetchPosts, isPostsLoading, postError] = useFetching(async (limit, page)=> {
-        const response = await PostService.getAll(limit, page);
+        const response = await PostService.getAll(limit, page)
         setPosts([...posts, ...response.data])
         const totalCount = response.headers['x-total-count']
         setTotalPages(getPagesCount(totalCount, limit))
@@ -35,16 +39,20 @@ function Posts() {
 
     useObserver(lastElement, page < totalPages, isPostsLoading, ()=>{
         setPage(page + 1)
+				console.log(page)
     })
+    
     useEffect(()=> {
         fetchPosts(limit, page)
     }, [page, limit])
 
     const createPost = (newPost) => {
-        setPosts([...posts, newPost])
+        PostService.createPost(newPost).then((r)=>page===totalPages?setPosts([...posts, r.data]):null)
+
         setVisible(false)
     }
     const removePost = (post) => {
+        PostService.deletePost(post.id)
         setPosts(posts.filter(p => p.id !== post.id))
     }
 
@@ -54,9 +62,9 @@ function Posts() {
 
     return (
         <div className="App">
-            <button onClick={fetchPosts}>Get Posts</button>
+            {/* <button onClick={fetchPosts}>Get Posts</button> */}
             <MyButton style={{marginTop: 30}} onClick={()=>setVisible(true)}>
-                Create Post
+                {t("posts.create")}
             </MyButton>
             <MyModal visible={visible} setVisible={setVisible}>
                 <PostForm create={createPost}/>
@@ -69,7 +77,7 @@ function Posts() {
             <MySelect
                 value={limit}
                 onChange={value => setLimit(value)}
-                defaultValue="Number of Elements"
+                defaultValue={t("posts.posts_number")}
                 options={[
                     {value: 5, name: "5"},
                     {value: 10, name: "10"},
@@ -78,19 +86,19 @@ function Posts() {
                 ]}
             />
             {postError &&
-                <h1 style={{textAlign: "center"}}>Error: ${postError}</h1>}
-            <PostList remove={removePost} posts={sortedAndSearchedPosts} title="JS Posts"/>
-            <div ref={lastElement} style={{height: 20, background: "red"}}/>
+                <h1 style={{textAlign: "center"}}>{t("posts.error")} ${postError}</h1>}
+            <PostList remove={removePost} posts={sortedAndSearchedPosts} title={t("posts.title_js")}/>
+            <div ref={lastElement} style={{height: 20}}/>
             {isPostsLoading &&
                 < div style={{display: "flex", justifyContent: "center", marginTop: "50px"}}>
                     <Loader/>
                 </div>
             }
-            <Pagination
+            {/* <Pagination
                 page={page}
                 changePage={changePage}
                 totalPages={totalPages}
-            />
+            /> */}
         </div>
     );
 }

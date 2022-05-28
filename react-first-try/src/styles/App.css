@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans&display=swap);
 
 #root {
     display: flex;
@@ -11,6 +12,7 @@
 }
 
 .App {
+    margin-top: 80px;
     width: 800px;
 }
 
@@ -62,8 +64,9 @@
 }
 
 .navbar {
-    height: 50px;
+    height: 80px;
     width: 100vw;
+    position: fixed;
     display: flex;
     align-items: center;
     padding: 0 15px;
@@ -71,5 +74,13 @@
 }
 
 .navbar__links {
-    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
 }
