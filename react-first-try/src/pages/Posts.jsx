@@ -48,7 +48,9 @@ function Posts() {
 
     const createPost = (newPost) => {
         PostService.createPost(newPost).then((r)=>page===totalPages?setPosts([...posts, r.data]):null)
-
+        if (posts.length < limit){
+            fetchPosts(limit, page)
+        }
         setVisible(false)
     }
     const removePost = (post) => {

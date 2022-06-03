@@ -4,7 +4,7 @@ import MyButton from "../button/MyButton";
 import {AuthContext} from "../../../context";
 import {useTranslation} from "react-i18next";
 
-import logo from "/home/simplepc/Documents/Git/ReactFirstTry/react-first-try/src/images/pngaaa.com-2507930.png";
+import logo from "../../../images/react_logo.png";
 
 const Navbar = () => {
     const {isAuth, setIsAuth} = useContext(AuthContext)
