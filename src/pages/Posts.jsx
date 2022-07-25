@@ -46,13 +46,18 @@ function Posts() {
         fetchPosts(limit, page)
     }, [page, limit])
 
+    // const createPost = (newPost) => {
+    //     PostService.createPost(newPost).then((r)=>page===totalPages?setPosts([...posts, r.data]):null)
+    //     if (posts.length < limit){
+    //         fetchPosts(limit, page)
+    //     }
+    //     setVisible(false)
+    // }
     const createPost = (newPost) => {
-        PostService.createPost(newPost).then((r)=>page===totalPages?setPosts([...posts, r.data]):null)
-        if (posts.length < limit){
-            fetchPosts(limit, page)
-        }
+        setPosts([...posts, newPost])
         setVisible(false)
     }
+
     const removePost = (post) => {
         PostService.deletePost(post.id)
         setPosts(posts.filter(p => p.id !== post.id))

@@ -32,9 +32,13 @@ const Navbar = () => {
             <MyButton onClick={()=>changeLanguage("ru")} style={{marginLeft:"10px"}}>
             {t("navbar.RU")}
             </MyButton>
-            <MyButton onClick={logout} style={{marginLeft:"20px"}}>
-            {t("navbar.logout")}
-            </MyButton>
+            {
+                isAuth?
+                    <MyButton onClick={logout} style={{marginLeft:"20px"}}>
+                        {t("navbar.logout")}
+                    </MyButton>
+                    : null
+            }
         </div>
     );
 };
