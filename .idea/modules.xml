@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ReactFirstTry.iml" filepath="$PROJECT_DIR$/.idea/ReactFirstTry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/react-first-try.iml" filepath="$PROJECT_DIR$/.idea/react-first-try.iml" />
     </modules>
   </component>
 </project>
